@@ -1,0 +1,666 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArtVista - Online Art Gallery</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f0e6;
+    color: #29231e;
+}
+
+/* HEADER */
+
+header {
+    background: #29211d;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    color: #e6bd76;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    gap: 25px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #e6bd76;
+}
+
+.menu-btn {
+    display: none;
+    color: white;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 430px;
+    display: flex;
+    align-items: center;
+    padding: 70px 7%;
+    color: white;
+    background:
+    linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)),
+    url("https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=1600&q=80")
+    center/cover no-repeat;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.hero h1 {
+    font-size: clamp(35px, 6vw, 60px);
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.btn {
+    display: inline-block;
+    background: #c69b55;
+    color: #211a15;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* GENERAL SECTIONS */
+
+section {
+    padding: 65px 7%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.section-title h2 {
+    font-size: 32px;
+    color: #593b29;
+}
+
+.section-title p {
+    color: #75695e;
+    margin-top: 8px;
+}
+
+/* SEARCH AND FILTER */
+
+.search-box {
+    display: block;
+    width: min(100%, 350px);
+    padding: 12px;
+    margin: 0 auto 25px;
+    border: 1px solid #bca98f;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.gallery-controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.filter-btn {
+    padding: 9px 18px;
+    border: 1px solid #593b29;
+    border-radius: 20px;
+    background: transparent;
+    color: #593b29;
+    cursor: pointer;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: #593b29;
+    color: white;
+}
+
+/* GALLERY */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.art-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,.1);
+    transition: .3s;
+}
+
+.art-card:hover {
+    transform: translateY(-6px);
+}
+
+.art-card img {
+    width: 100%;
+    height: 260px;
+    display: block;
+    object-fit: cover;
+    background: #d8c7ae;
+    cursor: pointer;
+}
+
+.art-info {
+    padding: 18px;
+}
+
+.art-info h3 {
+    color: #593b29;
+    margin-bottom: 6px;
+}
+
+.art-info p {
+    color: #766b60;
+    font-size: 14px;
+}
+
+.no-results {
+    display: none;
+    text-align: center;
+    padding: 20px;
+}
+
+/* ARTISTS */
+
+.artists {
+    background: #e9dfcf;
+}
+
+.artist-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.artist-card {
+    background: white;
+    padding: 25px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.artist-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.artist-card h3 {
+    color: #593b29;
+    margin-bottom: 8px;
+}
+
+/* CONTACT */
+
+.contact-container {
+    max-width: 650px;
+    margin: auto;
+}
+
+.contact-container input,
+.contact-container textarea {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 15px;
+    border: 1px solid #c7b69e;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.contact-container textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+#form-message {
+    margin-top: 15px;
+    color: green;
+}
+
+/* IMAGE PREVIEW */
+
+.lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.92);
+    z-index: 200;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.lightbox.show {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 85vh;
+    object-fit: contain;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 15px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* FOOTER */
+
+footer {
+    background: #29211d;
+    color: white;
+    text-align: center;
+    padding: 22px;
+}
+
+/* TABLET */
+
+@media(max-width: 992px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .artist-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width: 768px) {
+    header {
+        padding: 15px 5%;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #29211d;
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    nav.open {
+        display: flex;
+    }
+
+    section {
+        padding: 45px 5%;
+    }
+
+    .hero {
+        min-height: 350px;
+        padding: 50px 5%;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .gallery-grid,
+    .artist-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 400px) {
+    .logo {
+        font-size: 23px;
+    }
+
+    .filter-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">ArtVista</div>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</button>
+
+    <nav id="navbar">
+        <a href="#home">Home</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#artists">Artists</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>Discover the Beauty of Art</h1>
+        <p>
+            Explore creativity, imagination and inspiration
+            through our collection of beautiful artworks.
+        </p>
+        <a href="#gallery" class="btn">Explore Gallery</a>
+    </div>
+</section>
+
+<section id="gallery">
+
+    <div class="section-title">
+        <h2>Our Art Gallery</h2>
+        <p>Explore our collection of creative artworks.</p>
+    </div>
+
+    <input type="text" id="searchInput"
+           class="search-box" placeholder="Search artwork...">
+
+    <div class="gallery-controls">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="painting">Painting</button>
+        <button class="filter-btn" data-filter="abstract">Abstract</button>
+        <button class="filter-btn" data-filter="modern">Modern Art</button>
+    </div>
+
+    <div class="gallery-grid" id="galleryGrid">
+
+        <article class="art-card" data-category="painting">
+            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?auto=format&fit=crop&w=900&q=80"
+                 alt="Classical painting">
+            <div class="art-info">
+                <h3>Classical Beauty</h3>
+                <p>Painting | Traditional Art</p>
+            </div>
+        </article>
+
+        <article class="art-card" data-category="abstract">
+            <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?auto=format&fit=crop&w=900&q=80"
+                 alt="Colorful abstract painting">
+            <div class="art-info">
+                <h3>Colorful Imagination</h3>
+                <p>Abstract | Creative Art</p>
+            </div>
+        </article>
+
+        <article class="art-card" data-category="modern">
+            <img src="https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=900&q=80"
+                 alt="Modern artwork">
+            <div class="art-info">
+                <h3>Modern Expression</h3>
+                <p>Modern Art | Contemporary</p>
+            </div>
+        </article>
+
+        <article class="art-card" data-category="painting">
+            <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&w=900&q=80"
+                 alt="Gallery painting">
+            <div class="art-info">
+                <h3>Artistic Vision</h3>
+                <p>Painting | Fine Art</p>
+            </div>
+        </article>
+
+        <article class="art-card" data-category="abstract">
+            <img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=900&q=80"
+                 alt="Abstract artwork">
+            <div class="art-info">
+                <h3>Creative World</h3>
+                <p>Abstract | Visual Art</p>
+            </div>
+        </article>
+
+        <article class="art-card" data-category="modern">
+            <img src="https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=900&q=80"
+                 alt="Contemporary art">
+            <div class="art-info">
+                <h3>Modern Masterpiece</h3>
+                <p>Modern Art | Gallery Collection</p>
+            </div>
+        </article>
+
+    </div>
+
+    <p class="no-results" id="noResults">No matching artwork found.</p>
+</section>
+
+<section class="artists" id="artists">
+
+    <div class="section-title">
+        <h2>Featured Artists</h2>
+        <p>Meet the creative minds behind beautiful art.</p>
+    </div>
+
+    <div class="artist-grid">
+        <div class="artist-card">
+            <div class="artist-icon">🎨</div>
+            <h3>Leonardo Artist</h3>
+            <p>Traditional painting specialist.</p>
+        </div>
+
+        <div class="artist-card">
+            <div class="artist-icon">🖌️</div>
+            <h3>Emma Creative</h3>
+            <p>Abstract and modern artist.</p>
+        </div>
+
+        <div class="artist-card">
+            <div class="artist-icon">🖼️</div>
+            <h3>David Colors</h3>
+            <p>Contemporary art creator.</p>
+        </div>
+    </div>
+
+</section>
+
+<section id="contact">
+
+    <div class="section-title">
+        <h2>Contact Us</h2>
+        <p>Have a question? Send us a message.</p>
+    </div>
+
+    <form class="contact-container" id="contactForm">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <textarea id="message" placeholder="Your Message" required></textarea>
+
+        <button type="submit" class="btn">Send Message</button>
+        <p id="form-message" aria-live="polite"></p>
+    </form>
+
+</section>
+
+<footer>
+    <p>© <span id="year"></span> ArtVista Art Gallery. All Rights Reserved.</p>
+</footer>
+
+<div class="lightbox" id="lightbox">
+    <button class="close-lightbox" id="closeLightbox">&times;</button>
+    <img src="" alt="Artwork preview" id="lightboxImage">
+</div>
+
+<script>
+
+// Mobile menu
+const menuBtn = document.getElementById("menuBtn");
+const navbar = document.getElementById("navbar");
+
+menuBtn.addEventListener("click", function() {
+    navbar.classList.toggle("open");
+    menuBtn.textContent = navbar.classList.contains("open") ? "✕" : "☰";
+});
+
+document.querySelectorAll("#navbar a").forEach(link => {
+    link.addEventListener("click", function() {
+        navbar.classList.remove("open");
+        menuBtn.textContent = "☰";
+    });
+});
+
+// Gallery search and filters
+const cards = document.querySelectorAll(".art-card");
+const buttons = document.querySelectorAll(".filter-btn");
+const searchInput = document.getElementById("searchInput");
+const noResults = document.getElementById("noResults");
+
+let selectedCategory = "all";
+
+function filterGallery() {
+    let count = 0;
+    const search = searchInput.value.toLowerCase();
+
+    cards.forEach(card => {
+        const matchesCategory =
+            selectedCategory === "all" ||
+            card.dataset.category === selectedCategory;
+
+        const matchesSearch =
+            card.textContent.toLowerCase().includes(search);
+
+        if (matchesCategory && matchesSearch) {
+            card.style.display = "block";
+            count++;
+        } else {
+            card.style.display = "none";
+        }
+    });
+
+    noResults.style.display = count === 0 ? "block" : "none";
+}
+
+buttons.forEach(button => {
+    button.addEventListener("click", function() {
+        buttons.forEach(btn => btn.classList.remove("active"));
+        this.classList.add("active");
+        selectedCategory = this.dataset.filter;
+        filterGallery();
+    });
+});
+
+searchInput.addEventListener("input", filterGallery);
+
+// Image preview
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightboxImage");
+
+document.querySelectorAll(".art-card img").forEach(img => {
+    img.addEventListener("click", function() {
+        lightboxImage.src = this.src;
+        lightbox.classList.add("show");
+    });
+});
+
+document.getElementById("closeLightbox").addEventListener("click", function() {
+    lightbox.classList.remove("show");
+});
+
+lightbox.addEventListener("click", function(event) {
+    if (event.target === lightbox) {
+        lightbox.classList.remove("show");
+    }
+});
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        lightbox.classList.remove("show");
+    }
+});
+
+// Image error fallback
+document.querySelectorAll(".art-card img").forEach(img => {
+    img.addEventListener("error", function() {
+        this.alt = "Artwork image could not be loaded";
+        this.style.display = "none";
+
+        const message = document.createElement("div");
+        message.textContent = "Image unavailable - check internet connection";
+        message.style.cssText =
+            "height:260px;display:flex;align-items:center;" +
+            "justify-content:center;background:#e9dfcf;color:#593b29;" +
+            "text-align:center;padding:15px;";
+
+        this.parentElement.insertBefore(message, this);
+    }, { once: true });
+});
+
+// Contact form
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+
+    document.getElementById("form-message").textContent =
+        "Thank you, " + name + "! Your message has been received.";
+
+    this.reset();
+});
+
+// Current year
+document.getElementById("year").textContent = new Date().getFullYear();
+
+</script>
+
+</body>
+</html>
