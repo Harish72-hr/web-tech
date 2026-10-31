@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Art Gallery Registration</title>
+    <style>
+        body {
+            background-color: #f5f0e6;
+            font-family: Arial;
+            color: #333;
+        }
+        h2 {
+            background-color: #292929;
+            color: gold;
+            text-align: center;
+            padding: 15px;
+        }
+        form {
+            background-color: white;
+            width: 350px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input, select {
+            margin: 6px 0;
+        }
+        button {
+            background-color: #292929;
+            color: gold;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Art Gallery Registration Form</h2>
+
+<form action="#" method="post">
+
+    <!-- Personal Details -->
+    <label>Full Name:</label><br>
+    <input type="text" name="name" placeholder="Enter your name" required><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" name="email" placeholder="Enter your email" required><br><br>
+
+    <label>Password:</label><br>
+    <input type="password" name="password" required><br><br>
+
+    <label>Age:</label><br>
+    <input type="number" name="age" min="18" max="60"><br><br>
+
+    <label>Date of Birth:</label><br>
+    <input type="date" name="dob"><br><br>
+
+    <!-- Gender -->
+    <label>Gender:</label><br>
+    <input type="radio" name="gender" value="male"> Male
+    <input type="radio" name="gender" value="female"> Female<br><br>
+
+    <!-- Art Interests -->
+    <label>Art Interests:</label><br>
+    <input type="checkbox" name="art" value="painting"> Painting
+    <input type="checkbox" name="art" value="sketching"> Sketching
+    <input type="checkbox" name="art" value="digital"> Digital Art<br><br>
+
+    <!-- Exhibition -->
+    <label>Select Exhibition:</label><br>
+    <select name="exhibition">
+        <option>Modern Art</option>
+        <option>Traditional Art</option>
+        <option>Digital Art</option>
+    </select><br><br>
+
+    <!-- City -->
+    <label>City:</label><br>
+    <input list="cities" name="city">
+    <datalist id="cities">
+        <option value="Chennai">
+        <option value="Coimbatore">
+        <option value="Madurai">
+    </datalist><br><br>
+
+    <!-- Rating -->
+    <label>Rate Your Interest in Art:</label><br>
+    <input type="range" name="rating" min="1" max="10"><br><br>
+
+    <!-- Favorite Color -->
+    <label>Favorite Art Color:</label><br>
+    <input type="color" name="color"><br><br>
+
+    <button type="submit">Register</button>
+
+</form>
+
+</body>
+</html>
