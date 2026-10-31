@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Lab Portfolio</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f0e6;
+            color: #292929;
+        }
+
+        header {
+            background: #292929;
+            color: white;
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        header h1 {
+            color: gold;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #ccc;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .number {
+            color: #a07827;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .card a {
+            display: inline-block;
+            background: #292929;
+            color: white;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .card a:hover {
+            background: #8b4513;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>MY WEB LAB</h1>
+    <p>Experiments | Projects | Practical Works</p>
+    <p>Explore all my web development experiments</p>
+</header>
+
+<div class="container">
+
+    <script>
+        for (let i = 1; i <= 10; i++) {
+            let folder = "exp" + String(i).padStart(2, "0");
+
+            document.write(`
+                <div class="card">
+                    <p class="number">EXPERIMENT ${String(i).padStart(2, "0")}</p>
+                    <h2>Practical ${i}</h2>
+                    <p>View my experiment and its output.</p>
+                    <a href="${folder}/index.html">Open Experiment →</a>
+                </div>
+            `);
+        }
+    </script>
+
+</div>
+
+<footer>
+    <p>© 2026 My Web Lab Portfolio</p>
+</footer>
+
+</body>
+</html>
