@@ -2,109 +2,593 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Lab Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<title>ArtVista | Creative Art Gallery</title>
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f0e6;
-            color: #292929;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
 
-        header {
-            background: #292929;
-            color: white;
-            text-align: center;
-            padding: 45px 20px;
-        }
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f8f5ef;
+    color: #29231f;
+}
 
-        header h1 {
-            color: gold;
-        }
+/* NAVBAR */
 
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 30px 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
+header {
+    width: 100%;
+    padding: 22px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fffdf9;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+}
 
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px #ccc;
-            transition: 0.3s;
-        }
+.logo {
+    font-size: 27px;
+    font-weight: 800;
+    color: #702d36;
+    letter-spacing: 1px;
+}
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
+.logo span {
+    color: #c39a54;
+}
 
-        .number {
-            color: #a07827;
-            font-size: 14px;
-            font-weight: bold;
-        }
+nav a {
+    text-decoration: none;
+    color: #403632;
+    margin-left: 28px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.3s;
+}
 
-        .card a {
-            display: inline-block;
-            background: #292929;
-            color: white;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 5px;
-        }
+nav a:hover {
+    color: #a66a38;
+}
 
-        .card a:hover {
-            background: #8b4513;
-        }
+/* HERO SECTION */
 
-        footer {
-            text-align: center;
-            padding: 20px;
-        }
-    </style>
+.hero {
+    min-height: 620px;
+    background:
+    linear-gradient(90deg, rgba(25,15,13,0.88), rgba(25,15,13,0.2)),
+    url("https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=1800&auto=format&fit=crop")
+    center/cover no-repeat;
+
+    display: flex;
+    align-items: center;
+    padding: 80px 10%;
+    color: white;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.hero-label {
+    color: #e5bd78;
+    letter-spacing: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(42px, 6vw, 76px);
+    line-height: 1.08;
+    margin-bottom: 25px;
+    font-family: Georgia, serif;
+}
+
+.hero h1 span {
+    color: #e5bd78;
+    font-style: italic;
+}
+
+.hero p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #e7dfd8;
+    margin-bottom: 35px;
+}
+
+.hero-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background: #c49a59;
+    color: #241b17;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.hero-btn:hover {
+    background: white;
+    transform: translateY(-3px);
+}
+
+/* INTRODUCTION */
+
+.intro {
+    padding: 90px 10%;
+    text-align: center;
+}
+
+.section-label {
+    color: #a66a38;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
+
+.intro h2,
+.section-heading h2 {
+    font-family: Georgia, serif;
+    font-size: 42px;
+    color: #4b1e24;
+    margin-bottom: 20px;
+}
+
+.intro p {
+    max-width: 750px;
+    margin: auto;
+    line-height: 1.9;
+    color: #756b63;
+    font-size: 16px;
+}
+
+/* ARTWORK SECTION */
+
+.art-section {
+    padding: 20px 8% 90px;
+}
+
+.art-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.art-image {
+    height: 310px;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #e7ddd0;
+}
+
+.art-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.art-image:hover img {
+    transform: scale(1.08);
+}
+
+.art-caption {
+    padding: 15px 5px;
+}
+
+.art-caption h3 {
+    font-family: Georgia, serif;
+    color: #4b1e24;
+    margin-bottom: 7px;
+}
+
+.art-caption p {
+    color: #82766e;
+    font-size: 14px;
+}
+
+/* EXPERIMENT SECTION */
+
+.experiment-section {
+    background: #eee7dc;
+    padding: 90px 8%;
+}
+
+.section-heading {
+    text-align: center;
+}
+
+.section-heading p {
+    color: #766c64;
+    margin-top: 10px;
+    line-height: 1.7;
+}
+
+.experiment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 50px;
+}
+
+.experiment-card {
+    background: #fffdf9;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #e6d9c9;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.experiment-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(64,36,27,0.12);
+    border-color: #c49a59;
+}
+
+.exp-number {
+    font-size: 35px;
+    font-family: Georgia, serif;
+    color: #c49a59;
+    margin-bottom: 18px;
+}
+
+.experiment-card h3 {
+    color: #4b1e24;
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.experiment-card p {
+    color: #81766e;
+    font-size: 14px;
+    line-height: 1.7;
+    min-height: 48px;
+    margin-bottom: 22px;
+}
+
+.exp-link {
+    display: inline-block;
+    color: #8a4b35;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 1px solid #c49a59;
+    padding-bottom: 5px;
+    transition: 0.3s;
+}
+
+.exp-link:hover {
+    color: #c49a59;
+    padding-left: 5px;
+}
+
+/* QUOTE SECTION */
+
+.quote-section {
+    padding: 85px 10%;
+    text-align: center;
+    background: #4b1e24;
+    color: white;
+}
+
+.quote-section h2 {
+    font-family: Georgia, serif;
+    font-size: 35px;
+    font-style: italic;
+    line-height: 1.5;
+    max-width: 800px;
+    margin: auto;
+}
+
+.quote-section p {
+    color: #d7b77f;
+    margin-top: 20px;
+    letter-spacing: 3px;
+    font-size: 12px;
+}
+
+/* FOOTER */
+
+footer {
+    background: #241b19;
+    color: #e9ded1;
+    padding: 40px 8%;
+    text-align: center;
+}
+
+footer h2 {
+    font-family: Georgia, serif;
+    color: #e1bd80;
+    margin-bottom: 12px;
+}
+
+footer p {
+    font-size: 13px;
+    color: #b8aaa0;
+    line-height: 1.8;
+}
+
+/* RESPONSIVE DESIGN */
+
+@media (max-width: 900px) {
+    .art-grid,
+    .experiment-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    header {
+        padding: 20px 5%;
+    }
+
+    nav a {
+        margin-left: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    nav a {
+        margin: 0;
+        font-size: 13px;
+    }
+
+    .hero {
+        min-height: 520px;
+        padding: 60px 7%;
+    }
+
+    .hero h1 {
+        font-size: 43px;
+    }
+
+    .intro h2,
+    .section-heading h2 {
+        font-size: 32px;
+    }
+
+    .art-grid,
+    .experiment-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .art-section,
+    .experiment-section {
+        padding-left: 7%;
+        padding-right: 7%;
+    }
+
+    .quote-section h2 {
+        font-size: 26px;
+    }
+}
+</style>
 </head>
 
 <body>
 
+<!-- NAVIGATION -->
+
 <header>
-    <h1>MY WEB LAB</h1>
-    <p>Experiments | Projects | Practical Works</p>
-    <p>Explore all my web development experiments</p>
+    <div class="logo">Art<span>Vista.</span></div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#artworks">Artworks</a>
+        <a href="#experiments">Experiments</a>
+    </nav>
 </header>
 
-<div class="container">
+<!-- HERO -->
 
-    <script>
-        for (let i = 1; i <= 10; i++) {
-            let folder = "exp" + String(i).padStart(2, "0");
+<section class="hero" id="home">
+    <div class="hero-content">
 
-            document.write(`
-                <div class="card">
-                    <p class="number">EXPERIMENT ${String(i).padStart(2, "0")}</p>
-                    <h2>Practical ${i}</h2>
-                    <p>View my experiment and its output.</p>
-                    <a href="${folder}/index.html">Open Experiment →</a>
-                </div>
-            `);
-        }
-    </script>
+        <div class="hero-label">WELCOME TO ARTVISTA</div>
 
-</div>
+        <h1>Where Art Meets <span>Imagination.</span></h1>
+
+        <p>
+            Step into a world of creativity, colours and inspiration.
+            Explore beautiful artworks and discover our Web Technology
+            Laboratory experiments through an artistic experience.
+        </p>
+
+        <a href="#experiments" class="hero-btn">
+            Explore Experiments
+        </a>
+
+    </div>
+</section>
+
+<!-- ABOUT -->
+
+<section class="intro" id="about">
+
+    <div class="section-label">OUR CREATIVE SPACE</div>
+
+    <h2>Discover the Beauty of Art</h2>
+
+    <p>
+        ArtVista is a digital art gallery created to bring creativity
+        and technology together. Explore different forms of artistic
+        expression while discovering the concepts and techniques
+        demonstrated in our Web Technology Laboratory.
+    </p>
+
+</section>
+
+<!-- ARTWORKS -->
+
+<section class="art-section" id="artworks">
+
+    <div class="section-heading">
+        <div class="section-label">VISUAL COLLECTION</div>
+        <h2>Featured Artworks</h2>
+        <p>A small collection celebrating colour, imagination and creativity.</p>
+    </div>
+
+    <div class="art-grid">
+
+        <div>
+            <div class="art-image">
+                <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=700&auto=format&fit=crop" alt="Classical painting">
+            </div>
+            <div class="art-caption">
+                <h3>Classical Expressions</h3>
+                <p>Traditional beauty through timeless art.</p>
+            </div>
+        </div>
+
+        <div>
+            <div class="art-image">
+                <img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=700&auto=format&fit=crop" alt="Colourful abstract painting">
+            </div>
+            <div class="art-caption">
+                <h3>Abstract Visions</h3>
+                <p>Colours and shapes that inspire imagination.</p>
+            </div>
+        </div>
+
+        <div>
+            <div class="art-image">
+                <img src="https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?w=700&auto=format&fit=crop" alt="Modern artwork">
+            </div>
+            <div class="art-caption">
+                <h3>Modern Creations</h3>
+                <p>Contemporary ideas expressed through art.</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- EXPERIMENTS -->
+
+<section class="experiment-section" id="experiments">
+
+    <div class="section-heading">
+        <div class="section-label">WEB TECHNOLOGY LAB</div>
+        <h2>Our Experiments</h2>
+        <p>
+            Explore our practical experiments and discover the technologies
+            behind every webpage.
+        </p>
+    </div>
+
+    <div class="experiment-grid">
+
+        <div class="experiment-card">
+            <div class="exp-number">01</div>
+            <h3>Experiment 01</h3>
+            <p>Explore the first Web Technology practical experiment.</p>
+            <a href="exp01/index.html" class="exp-link">Explore Experiment →</a>
+        </div>
+
+        <div class="experiment-card">
+            <div class="exp-number">02</div>
+            <h3>Experiment 02</h3>
+            <p>Discover the second practical experiment in our gallery.</p>
+            <a href="exp02/index.html" class="exp-link">Explore Experiment →</a>
+        </div>
+
+        <div class="experiment-card">
+            <div class="exp-number">03</div>
+            <h3>Experiment 03</h3>
+            <p>Experience a responsive Art Gallery website design.</p>
+            <a href="exp03/index.html" class="exp-link">Explore Experiment →</a>
+        </div>
+
+        <div class="experiment-card">
+            <div class="exp-number">04</div>
+            <h3>Experiment 04</h3>
+            <p>Explore advanced CSS3 features through creative design.</p>
+            <a href="exp04/index.html" class="exp-link">Explore Experiment →</a>
+        </div>
+
+        <div class="experiment-card">
+            <div class="exp-number">05</div>
+            <h3>Experiment 05</h3>
+            <p>Discover our fifth Web Technology practical experiment.</p>
+            <a href="#" class="exp-link">Coming Soon →</a>
+        </div>
+
+        <div class="experiment-card">
+            <div class="exp-number">06</div>
+            <h3>Experiment 06</h3>
+            <p>Discover our sixth Web Technology practical experiment.</p>
+            <a href="#" class="exp-link">Coming Soon →</a>
+        </div>
+
+        <div class="experiment-card">
+            <div class="exp-number">07</div>
+            <h3>Experiment 07</h3>
+            <p>Discover our seventh Web Technology practical experiment.</p>
+            <a href="#" class="exp-link">Coming Soon →</a>
+        </div>
+
+        <div class="experiment-card">
+            <div class="exp-number">08</div>
+            <h3>Experiment 08</h3>
+            <p>Discover our eighth Web Technology practical experiment.</p>
+            <a href="#" class="exp-link">Coming Soon →</a>
+        </div>
+
+        <div class="experiment-card">
+            <div class="exp-number">09</div>
+            <h3>Experiment 09</h3>
+            <p>Discover our ninth Web Technology practical experiment.</p>
+            <a href="#" class="exp-link">Coming Soon →</a>
+        </div>
+
+        <div class="experiment-card">
+            <div class="exp-number">10</div>
+            <h3>Experiment 10</h3>
+            <p>Discover our tenth Web Technology practical experiment.</p>
+            <a href="#" class="exp-link">Coming Soon →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- QUOTE -->
+
+<section class="quote-section">
+    <h2>"Every artist was first an amateur."</h2>
+    <p>CREATIVITY • TECHNOLOGY • INNOVATION</p>
+</section>
+
+<!-- FOOTER -->
 
 <footer>
-    <p>© 2026 My Web Lab Portfolio</p>
+    <h2>ArtVista.</h2>
+    <p>Where creativity meets technology.</p>
+    <p>Web Technology Laboratory | 2026</p>
+    <p>© 2026 ArtVista Art Gallery. All Rights Reserved.</p>
 </footer>
 
 </body>
