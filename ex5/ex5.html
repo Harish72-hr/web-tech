@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ArtVista | Visitor Registration</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f0e8;
+    color: #30231f;
+}
+
+/* NAVIGATION */
+
+header {
+    background: #271815;
+    color: white;
+    padding: 20px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: Georgia, serif;
+    font-size: 28px;
+    color: #e5c28c;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #e5c28c;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 470px;
+    background:
+    linear-gradient(rgba(20,12,10,0.65), rgba(20,12,10,0.65)),
+    url("https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=1600")
+    center/cover no-repeat;
+
+    display: flex;
+    align-items: center;
+    padding: 70px 10%;
+    color: white;
+}
+
+.hero-content {
+    max-width: 650px;
+}
+
+.hero small {
+    color: #e5c28c;
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(42px, 6vw, 68px);
+    margin: 22px 0;
+}
+
+.hero p {
+    line-height: 1.8;
+    color: #eee3da;
+    font-size: 16px;
+}
+
+/* INTRODUCTION */
+
+.intro {
+    text-align: center;
+    padding: 65px 10% 35px;
+}
+
+.intro h2 {
+    font-family: Georgia, serif;
+    color: #51252b;
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.intro p {
+    color: #756b63;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: auto;
+}
+
+/* ARTWORK COLLECTION */
+
+.gallery {
+    padding: 35px 8% 75px;
+}
+
+.gallery h2 {
+    text-align: center;
+    font-family: Georgia, serif;
+    color: #51252b;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+.art-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.art-card {
+    background: white;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.art-card:hover {
+    transform: translateY(-7px);
+}
+
+.art-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+}
+
+.art-card h3 {
+    padding: 17px 18px 5px;
+    color: #51252b;
+    font-family: Georgia, serif;
+}
+
+.art-card p {
+    padding: 0 18px 20px;
+    color: #81766e;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* REGISTRATION SECTION */
+
+.registration {
+    padding: 80px 8%;
+    background: #e9dfd2;
+}
+
+.registration-heading {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.registration-heading small {
+    color: #a66a38;
+    letter-spacing: 4px;
+    font-weight: bold;
+}
+
+.registration-heading h2 {
+    color: #51252b;
+    font-family: Georgia, serif;
+    font-size: 38px;
+    margin: 14px 0;
+}
+
+.registration-heading p {
+    color: #756b63;
+    line-height: 1.7;
+}
+
+/* FORM LAYOUT */
+
+.form-layout {
+    max-width: 1050px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(50,30,20,0.12);
+}
+
+/* FORM IMAGE SIDE */
+
+.form-image {
+    background:
+    linear-gradient(rgba(39,24,21,0.3), rgba(39,24,21,0.7)),
+    url("https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?w=900")
+    center/cover no-repeat;
+
+    min-height: 650px;
+    display: flex;
+    align-items: flex-end;
+    padding: 35px;
+    color: white;
+}
+
+.form-image h3 {
+    font-family: Georgia, serif;
+    font-size: 32px;
+    line-height: 1.3;
+}
+
+.form-image p {
+    margin-top: 12px;
+    line-height: 1.7;
+    color: #eee3da;
+}
+
+/* FORM */
+
+.form-content {
+    padding: 40px;
+}
+
+.form-content h3 {
+    color: #51252b;
+    font-family: Georgia, serif;
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+.form-description {
+    color: #82766e;
+    font-size: 14px;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.form-row {
+    margin-bottom: 22px;
+}
+
+label {
+    display: block;
+    color: #51252b;
+    font-weight: bold;
+    margin-bottom: 9px;
+    font-size: 14px;
+}
+
+input, select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d7c9ba;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: #a66a38;
+    box-shadow: 0 0 6px rgba(166,106,56,0.2);
+}
+
+.error {
+    color: #c0392b;
+    font-size: 12px;
+    display: block;
+    margin-top: 7px;
+    min-height: 15px;
+}
+
+.form-row input.invalid,
+.form-row select.invalid {
+    border-color: #c0392b;
+    background: #fff7f6;
+}
+
+.form-row input.valid,
+.form-row select.valid {
+    border-color: #3c9360;
+    background: #f5fff7;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 15px;
+    background: #51252b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.register-btn:hover {
+    background: #a66a38;
+    transform: translateY(-3px);
+}
+
+/* SUCCESS MESSAGE */
+
+.success-message {
+    display: none;
+    padding: 18px;
+    margin-top: 20px;
+    background: #e8f7ec;
+    color: #23683b;
+    border-left: 4px solid #3c9360;
+    border-radius: 5px;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* FOOTER */
+
+footer {
+    background: #271815;
+    color: #d9c8b5;
+    text-align: center;
+    padding: 35px 15px;
+}
+
+footer h2 {
+    color: #e5c28c;
+    font-family: Georgia, serif;
+    margin-bottom: 10px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 800px) {
+    .form-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .form-image {
+        min-height: 300px;
+    }
+
+    .art-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 550px) {
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 0 6px;
+        font-size: 12px;
+    }
+
+    .hero {
+        min-height: 400px;
+        padding: 50px 7%;
+    }
+
+    .art-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-content {
+        padding: 25px 20px;
+    }
+
+    .registration-heading h2 {
+        font-size: 30px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+
+<header>
+    <div class="logo">ArtVista.</div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#registration">Register</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <small>ART • CULTURE • CREATIVITY</small>
+
+        <h1>Discover Art. Experience Creativity.</h1>
+
+        <p>
+            Welcome to ArtVista, a place where colours, imagination
+            and creativity come together. Explore our exhibitions
+            and register for an unforgettable artistic experience.
+        </p>
+    </div>
+</section>
+
+<!-- INTRODUCTION -->
+
+<section class="intro">
+    <h2>Welcome to ArtVista Gallery</h2>
+
+    <p>
+        Discover beautiful paintings, modern masterpieces and
+        creative expressions from different artistic styles.
+        Register as a visitor and explore our upcoming exhibitions.
+    </p>
+</section>
+
+<!-- GALLERY -->
+
+<section class="gallery" id="gallery">
+
+    <h2>Explore Our Collections</h2>
+
+    <div class="art-grid">
+
+        <div class="art-card">
+            <img
+            src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=700"
+            alt="Classical painting">
+
+            <h3>Classical Art</h3>
+            <p>Discover timeless masterpieces and traditional artwork.</p>
+        </div>
+
+        <div class="art-card">
+            <img
+            src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=700"
+            alt="Abstract painting">
+
+            <h3>Abstract Art</h3>
+            <p>Explore colourful expressions of imagination and emotion.</p>
+        </div>
+
+        <div class="art-card">
+            <img
+            src="https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?w=700"
+            alt="Modern artwork">
+
+            <h3>Modern Art</h3>
+            <p>Experience contemporary ideas through creative artwork.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- REGISTRATION -->
+
+<section class="registration" id="registration">
+
+    <div class="registration-heading">
+        <small>JOIN OUR ART COMMUNITY</small>
+
+        <h2>Visitor Registration</h2>
+
+        <p>
+            Fill in your details to register your interest
+            in visiting our art exhibition.
+        </p>
+    </div>
+
+    <div class="form-layout">
+
+        <div class="form-image">
+            <div>
+                <h3>Every Artwork Tells a Story.</h3>
+
+                <p>
+                    Be part of our creative journey.
+                    Discover inspiration and experience the beauty of art.
+                </p>
+            </div>
+        </div>
+
+        <div class="form-content">
+
+            <h3>Register Your Visit</h3>
+
+            <p class="form-description">
+                Please provide the following information.
+                All fields marked below are required.
+            </p>
+
+            <form id="signupForm" novalidate>
+
+                <div class="form-row">
+                    <label for="name">Full Name</label>
+
+                    <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your full name">
+
+                    <span class="error" id="nameError"></span>
+                </div>
+
+                <div class="form-row">
+                    <label for="email">Email Address</label>
+
+                    <input
+                    type="text"
+                    id="email"
+                    placeholder="example@gmail.com">
+
+                    <span class="error" id="emailError"></span>
+                </div>
+
+                <div class="form-row">
+                    <label for="password">Create Password</label>
+
+                    <input
+                    type="password"
+                    id="password"
+                    placeholder="Minimum 8 characters">
+
+                    <span class="error" id="passError"></span>
+                </div>
+
+                <div class="form-row">
+                    <label for="exhibition">Select Exhibition</label>
+
+                    <select id="exhibition">
+                        <option value="">Choose an exhibition</option>
+                        <option value="Classical Art">Classical Art</option>
+                        <option value="Abstract Art">Abstract Art</option>
+                        <option value="Modern Art">Modern Art</option>
+                    </select>
+
+                    <span class="error" id="exhibitionError"></span>
+                </div>
+
+                <button type="submit" class="register-btn">
+                    Register Now
+                </button>
+
+                <div class="success-message" id="successMessage">
+                    <strong>Registration Successful!</strong>
+                    <br>
+                    Welcome to ArtVista. We look forward to seeing you
+                    at our exhibition.
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+    <h2>ArtVista Gallery</h2>
+
+    <p>Where creativity meets imagination.</p>
+
+    <p>Web Technology Laboratory | Experiment 05</p>
+
+    <p>© 2026 ArtVista. All Rights Reserved.</p>
+</footer>
+
+<!-- EXTERNAL JAVASCRIPT FILE -->
+
+<script src="validate.js"></script>
+
+</body>
+</html>
