@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArtVista | Art Gallery</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            background: #f8f3e9;
+            color: #4b1e24;
+        }
+
+        header {
+            background: #4b1e24;
+            color: #e5bd78;
+            padding: 22px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        header a {
+            color: #e5bd78;
+            text-decoration: none;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 55px 20px;
+        }
+
+        .hero h2 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            color: #79565a;
+        }
+
+        .container {
+            width: 85%;
+            margin: auto;
+            padding-bottom: 50px;
+        }
+
+        .section-title {
+            margin-bottom: 22px;
+            font-size: 26px;
+        }
+
+        .art-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 25px;
+        }
+
+        .art-card {
+            background: white;
+            border: 1px solid #e5bd78;
+            overflow: hidden;
+        }
+
+        .art-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .art-info {
+            padding: 18px;
+        }
+
+        .art-info h3 {
+            margin-bottom: 8px;
+        }
+
+        .art-info p {
+            color: #79565a;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            color: #a87932;
+            font-weight: bold;
+        }
+
+        .form-section {
+            margin-top: 55px;
+            padding: 30px;
+            background: #fff;
+            border: 1px solid #e5bd78;
+        }
+
+        .form-section h2 {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 14px;
+            border: 1px solid #c49a59;
+            font-family: inherit;
+        }
+
+        button {
+            background: #4b1e24;
+            color: #e5bd78;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        button:hover {
+            background: #702d36;
+        }
+
+        #message {
+            margin-top: 15px;
+        }
+
+        footer {
+            background: #4b1e24;
+            color: #e5bd78;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>ArtVista</h1>
+        <a href="#gallery">Explore Gallery</a>
+    </header>
+
+    <section class="hero">
+        <h2>Discover the Beauty of Art</h2>
+        <p>Explore unique artworks from our ArtVista collection.</p>
+    </section>
+
+    <main class="container">
+
+        <section id="gallery">
+            <h2 class="section-title">Our Art Collection</h2>
+            <div class="art-grid" id="artGrid">
+                <p>Loading artworks...</p>
+            </div>
+        </section>
+
+        <section class="form-section">
+            <h2>Add New Artwork</h2>
+
+            <form id="artForm">
+                <input type="text" id="title"
+                    placeholder="Artwork Title" required>
+
+                <input type="text" id="artist"
+                    placeholder="Artist Name" required>
+
+                <input type="text" id="category"
+                    placeholder="Category" required>
+
+                <input type="number" id="price"
+                    placeholder="Price" min="0" required>
+
+                <input type="url" id="image"
+                    placeholder="Artwork Image URL (optional)">
+
+                <button type="submit">Add Artwork</button>
+            </form>
+
+            <p id="message"></p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2026 ArtVista Art Gallery | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        const artGrid = document.getElementById('artGrid');
+        const message = document.getElementById('message');
+
+        // Display artworks
+        async function loadArtworks() {
+            try {
+                const response = await fetch('/api/artworks');
+                const result = await response.json();
+
+                artGrid.innerHTML = '';
+
+                result.data.forEach(art => {
+                    const card = document.createElement('div');
+                    card.className = 'art-card';
+
+                    const image = document.createElement('img');
+                    image.src = art.image || 'https://placehold.co/600x400?text=Artwork';
+                    image.alt = art.title;
+
+                    const info = document.createElement('div');
+                    info.className = 'art-info';
+
+                    const title = document.createElement('h3');
+                    title.textContent = art.title;
+
+                    const artist = document.createElement('p');
+                    artist.textContent = 'Artist: ' + art.artist;
+
+                    const category = document.createElement('p');
+                    category.textContent = 'Category: ' + art.category;
+
+                    const price = document.createElement('p');
+                    price.className = 'price';
+                    price.textContent = '₹' + art.price;
+
+                    info.append(title, artist, category, price);
+                    card.append(image, info);
+                    artGrid.appendChild(card);
+                });
+
+            } catch (error) {
+                artGrid.textContent = 'Unable to load artworks.';
+            }
+        }
+
+        // Add artwork using POST request
+        document.getElementById('artForm')
+            .addEventListener('submit', async function(event) {
+
+                event.preventDefault();
+
+                const artwork = {
+                    title: document.getElementById('title').value,
+                    artist: document.getElementById('artist').value,
+                    category: document.getElementById('category').value,
+                    price: document.getElementById('price').value,
+                    image: document.getElementById('image').value
+                };
+
+                try {
+                    const response = await fetch('/api/artworks', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(artwork)
+                    });
+
+                    const result = await response.json();
+
+                    message.textContent = result.message;
+
+                    if (response.ok) {
+                        this.reset();
+                        loadArtworks();
+                    }
+
+                } catch (error) {
+                    message.textContent = 'Error adding artwork.';
+                }
+            });
+
+        // Load artworks when page opens
+        loadArtworks();
+    </script>
+
+</body>
+</html>
+    
