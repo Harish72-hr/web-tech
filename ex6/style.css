@@ -1,0 +1,359 @@
+/* General Styling */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --ink: #20201e;
+    --muted: #77756f;
+    --paper: #f7f5f0;
+    --line: #e8e4dc;
+    --accent: #b45f43;
+}
+
+body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "DM Sans", sans-serif;
+}
+
+/* Navigation */
+
+.gallery-nav {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 17px 0;
+}
+
+.navbar-brand {
+    font-family: "Playfair Display", serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.brand-mark {
+    display: inline-grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    background: var(--ink);
+    color: white;
+    border-radius: 50%;
+    font-size: 1rem;
+}
+
+.brand-dot {
+    color: var(--accent);
+}
+
+.nav-note {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* Hero Section */
+
+.hero {
+    padding: 30px 0 15px;
+}
+
+.eyebrow {
+    color: var(--accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.hero h1 {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(48px, 7vw, 85px);
+    line-height: 1;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.hero h1 em {
+    color: var(--accent);
+}
+
+.hero-copy {
+    color: var(--muted);
+    max-width: 450px;
+    line-height: 1.8;
+}
+
+.collection-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-left: 1px solid var(--line);
+}
+
+.collection-count span {
+    font-family: "Playfair Display", serif;
+    font-size: 45px;
+}
+
+.collection-count small {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+/* Search */
+
+.toolbar {
+    padding: 20px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.search-input {
+    padding: 13px 18px;
+    border-radius: 30px;
+    border: 1px solid var(--line);
+    background: white;
+}
+
+.search-input:focus {
+    border-color: var(--accent);
+    box-shadow: none;
+}
+
+/* Category Filters */
+
+.filter-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 10px 16px;
+    border-radius: 30px;
+    color: var(--muted);
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.filter-btn:hover {
+    border-color: var(--line);
+}
+
+.filter-btn.active {
+    background: var(--ink);
+    color: white;
+}
+
+/* Gallery Heading */
+
+.section-heading h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.result-label {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* Artwork Cards */
+
+.art-card {
+    height: 100%;
+    background: transparent;
+}
+
+.art-image-wrap {
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    aspect-ratio: 4 / 4.6;
+    background: #e8e3da;
+}
+
+.art-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.art-card:hover .art-image {
+    transform: scale(1.05);
+}
+
+.art-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        transparent 65%,
+        rgba(0, 0, 0, 0.3)
+    );
+}
+
+.favorite-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    background: white;
+    color: #333;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.favorite-btn.is-favorite {
+    color: #b34e43;
+}
+
+.view-btn {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 1px solid white;
+    border-radius: 30px;
+    padding: 8px 16px;
+    font-size: 12px;
+}
+
+/* Artwork Information */
+
+.art-meta {
+    padding: 15px 2px;
+}
+
+.art-category {
+    color: var(--accent);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.art-title {
+    font-family: "Playfair Display", serif;
+    font-size: 22px;
+    margin: 6px 0;
+}
+
+.art-artist {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+/* Empty State */
+
+.empty-state {
+    text-align: center;
+    padding: 70px 15px;
+}
+
+.empty-state h3 {
+    font-family: "Playfair Display", serif;
+    font-size: 30px;
+}
+
+.empty-state p {
+    color: var(--muted);
+}
+
+/* Modal */
+
+.modal-content {
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.modal-title {
+    font-family: "Playfair Display", serif;
+}
+
+.form-control,
+.form-select {
+    padding: 11px;
+    border-color: var(--line);
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--accent);
+    box-shadow: none;
+}
+
+.form-label {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Artwork Details */
+
+.detail-image {
+    width: 100%;
+    height: 100%;
+    min-height: 350px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.detail-copy {
+    padding: 25px;
+}
+
+.detail-copy h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 35px;
+}
+
+.detail-copy p {
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+/* Footer */
+
+.footer {
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.footer span {
+    color: var(--ink);
+    font-weight: 700;
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+
+    .hero h1 {
+        font-size: 52px;
+    }
+
+    .collection-count {
+        margin-top: 20px;
+    }
+
+    .section-heading h2 {
+        font-size: 25px;
+    }
+
+    .detail-image {
+        min-height: 250px;
+        max-height: 330px;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
